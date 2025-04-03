@@ -1,6 +1,7 @@
 package es.upm.dit.isst.tfg.tfgwebapp.model;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Arrays;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -66,9 +67,17 @@ public class TFG {
     public URI getMemoria() {
         return memoria;
     }
+
+    @JsonProperty
     public void setMemoria(URI memoria) {
         this.memoria = memoria;
     }
+
+    @JsonGetter("memoria")
+    public URI getDireccionMemoria() throws URISyntaxException {
+        return new URI("./memoria");
+    }
+
     public Double getCalificacion() {
         return calificacion;
     }
@@ -96,7 +105,6 @@ public class TFG {
         result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
         result = prime * result + ((resumen == null) ? 0 : resumen.hashCode());
         result = prime * result + ((estado == null) ? 0 : estado.hashCode());
-        result = prime * result + ((memoria == null) ? 0 : memoria.hashCode());
         result = prime * result + ((calificacion == null) ? 0 : calificacion.hashCode());
         result = prime * result + ((matriculaHonor == null) ? 0 : matriculaHonor.hashCode());
         result = prime * result + ((sesion == null) ? 0 : sesion.hashCode());
@@ -136,11 +144,6 @@ public class TFG {
                 return false;
         } else if (!estado.equals(other.estado))
             return false;
-        if (memoria == null) {
-            if (other.memoria != null)
-                return false;
-        } else if (!memoria.equals(other.memoria))
-            return false;
         if (calificacion == null) {
             if (other.calificacion != null)
                 return false;
@@ -161,7 +164,7 @@ public class TFG {
     @Override
     public String toString() {
         return "TFG [alumno=" + alumno + ", tutor=" + tutor + ", titulo=" + titulo + ", resumen=" + resumen
-                + ", estado=" + estado + ", memoria=" + memoria + ", calificacion=" + calificacion + ", matriculaHonor="
+                + ", estado=" + estado + ", calificacion=" + calificacion + ", matriculaHonor="
                 + matriculaHonor + ", sesion=" + sesion + "]";
     }
 
